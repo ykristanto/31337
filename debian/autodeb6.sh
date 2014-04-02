@@ -24,7 +24,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.github.com/ykristanto/31337/master/debian/sources.list"
+wget --no-check-certificate -O /etc/apt/sources.list "https://raw.github.com/ykristanto/31337/master/debian/sources.list" 
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
@@ -60,7 +60,7 @@ service vnstat restart
 
 # install screenfetch
 cd
-wget -O screenfetch 'https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev'
+wget --no-check-certificate -O screenfetch 'https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev'
 mv screenfetch-dev /usr/bin/screenfetch
 chmod +x /usr/bin/screenfetch
 echo "clear" >> .profile
@@ -70,11 +70,11 @@ echo "screenfetch" >> .profile
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.github.com/ykristanto/31337/master/debian/nginx/nginx.conf"
+wget --no-check-certificate -O /etc/nginx/nginx.conf "https://raw.github.com/ykristanto/31337/master/debian/nginx/nginx.conf" 
 mkdir -p /home/vps/public_html
 echo "<pre>Setup by ykristanto pin bb : 27b79eb5 </pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/ykristanto/31337/master/debian/nginx/vps.conf"
+wget --no-check-certificate -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/ykristanto/31337/master/debian/nginx/vps.conf" 
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
@@ -86,17 +86,17 @@ mv ovpn-client.tar.gz /home/vps/public_html/
 cd
 
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/ykristanto/31337/master/debian/badvpn-udpgw"
+wget --no-check-certificate -O /usr/bin/badvpn-udpgw "https://raw.github.com/ykristanto/31337/master/debian/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/ykristanto/31337/master/debian/badvpn-udpgw64"
+  wget --no-check-certificate -O /usr/bin/badvpn-udpgw "https://raw.github.com/ykristanto/31337/master/debian/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.github.com/ykristanto/31337/master/debian/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.github.com/ykristanto/31337/master/debian/mrtg-mem.sh"
+wget --no-check-certificate -O /etc/snmp/snmpd.conf "https://raw.github.com/ykristanto/31337/master/debian/snmpd.conf"
+wget --no-check-certificate -O /root/mrtg-mem.sh "https://raw.github.com/ykristanto/31337/master/debian/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -141,7 +141,7 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.github.com/ykristanto/31337/master/debian/squid3.conf"
+wget --no-check-certificate -O /etc/squid3/squid.conf "https://raw.github.com/ykristanto/31337/master/debian/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
@@ -156,12 +156,12 @@ service vnstat restart
 
 # download script
 cd
-wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
-wget -O bench-network.sh "https://raw.github.com/ykristanto/31337/master/debian/bench-network.sh"
-wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O login "https://raw.github.com/ykristanto/31337/master/debian/script/login"
-wget -O member "https://raw.github.com/ykristanto/31337/master/debian/script/member"
-wget -O userlmtop "https://raw.github.com/ykristanto/31337/master/debian/script/userlmtop"
+wget --no-check-certificate-O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
+wget --no-check-certificate -O bench-network.sh "https://raw.github.com/ykristanto/31337/master/debian/bench-network.sh"
+wget --no-check-certificate -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
+wget --no-check-certificate -O login "https://raw.github.com/ykristanto/31337/master/debian/script/login"
+wget --no-check-certificate -O member "https://raw.github.com/ykristanto/31337/master/debian/script/member"
+wget --no-check-certificate -O userlmtop "https://raw.github.com/ykristanto/31337/master/debian/script/userlmtop"
 
 chmod +x bench-network.sh
 chmod +x speedtest_cli.py
