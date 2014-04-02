@@ -1,0 +1,6 @@
+deb ftp://ftp.us.debian.org/debian/ squeeze main contrib non-free 
+deb-src ftp://ftp.us.debian.org/debian/ squeeze main contrib non-free 
+deb http://security.debian.org/ squeeze/updates main contrib non-free 
+deb-src http://security.debian.org/ squeeze/updates main contrib non-free 
+deb http://download.webmin.com/download/repository sarge contrib
+deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib
