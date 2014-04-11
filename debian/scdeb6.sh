@@ -23,7 +23,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.github.com/ykristanto/31337/master/debian/sources.list"
+wget  https://raw.github.com/ykristanto/31337/master/debian/sources.list --no-check-certificate -O /etc/apt/sources.list
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -; rm dotdeb.gpg
@@ -69,19 +69,19 @@ echo "screenfetch" >> .profile
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.github.com/ykristanto/31337/master/debian/nginx/nginx.conf"
+wget  https://raw.github.com/ykristanto/31337/master/debian/nginx/nginx.conf --no-check-certificate -O /etc/nginx/nginx.conf
 mkdir -p /home/vps/public_html
 echo "<pre>Setup by m3</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/ykristanto/31337/master/debian/nginx/vps.conf"
+wget https://raw.github.com/ykristanto/31337/master/debian/nginx/vps.conf --no-check-certificate -O  /etc/nginx/conf.d/vps.conf
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
 
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.github.com/ykristanto/31337/master/debian/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.github.com/ykristanto/31337/master/debian/mrtg-mem.sh"
+wget https://raw.github.com/ykristanto/31337/master/debian/snmpd.conf --no-check-certificate -O /etc/snmp/snmpd.conf
+wget  https://raw.github.com/ykristanto/31337/master/debian/mrtg-mem.sh --no-check-certificate  -O /root/mrtg-mem.sh
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -139,11 +139,10 @@ service vnstat restart
 cd
 wget -O speedtest_cli.py "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O login "https://raw.github.com/ykristanto/31337/master/debian/script/login"
-wget -O member "https://raw.github.com/ykristanto/31337/master/debian/script/member"
-wget -O login "https://raw.github.com/ykristanto/31337/master/debian/script/login"
-wget -O userlmt "https://raw.github.com/ykristanto/31337/master/debian/script/userlmt"
-wget -O userlmtop "https://raw.github.com/ykristanto/31337/master/debian/script/userlmtop"
+wget  https://raw.github.com/ykristanto/31337/master/debian/script/login  --no-check-certificate -O login
+wget  https://raw.github.com/ykristanto/31337/master/debian/script/member --no-check-certificate -O member
+wget https://raw.github.com/ykristanto/31337/master/debian/script/userlmt --no-check-certificate -O userlmt
+wget https://raw.github.com/ykristanto/31337/master/debian/script/userlmtop --no-check-certificate -O userlmtop
 chmod +x speedtest_cli.py
 chmod +x ps_mem.py
 chmod +x member
