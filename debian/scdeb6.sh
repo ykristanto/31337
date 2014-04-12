@@ -13,7 +13,7 @@ echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
 # install wget and curl
-apt-get update;apt-get -y install wget curl;
+apt-get update;apt-get -y install wget curl
 
 # set time GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
@@ -43,7 +43,7 @@ apt-get -y install nginx php5-fpm php5-cli
 
 
 # install essential package
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
+apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter webmin
 apt-get -y install build-essential
 
 # disable exim
@@ -59,11 +59,12 @@ service vnstat restart
 
 # install screenfetch
 cd
-wget https://github.com/KittyKatt/screenFetch/raw/master/screenfetch-dev
+wget https://github.com/KittyKatt/screenFetch/raw/master/screenfetch-dev --no-check-certificate  -O screenfetch-dev
 mv screenfetch-dev /usr/bin/screenfetch
 chmod +x /usr/bin/screenfetch
 echo "clear" >> .profile
 echo "screenfetch" >> .profile
+
 
 # install webserver
 cd
@@ -78,8 +79,8 @@ sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php
 service php5-fpm restart
 service nginx restart
 
-
 # install mrtg
+cd
 wget https://raw.github.com/ykristanto/31337/master/debian/snmpd.conf --no-check-certificate -O /etc/snmp/snmpd.conf
 wget  https://raw.github.com/ykristanto/31337/master/debian/mrtg-mem.sh --no-check-certificate  -O /root/mrtg-mem.sh
 chmod +x /root/mrtg-mem.sh
@@ -105,9 +106,7 @@ sed -i '/Port 22/a Port 31337' /etc/ssh/sshd_config
 echo "/bin/false" >> /etc/shells
 useradd -m -s /bin/false xadmin
 echo xadmin:1234qwer | chpasswd
-
 service ssh restart
-
 
 # install vnstat gui
 cd /home/vps/public_html/
@@ -125,13 +124,6 @@ cd
 
 # install fail2ban
 apt-get -y install fail2ban;service fail2ban restart
-
-# install webmin
-cd
-wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.670_all.deb"
-dpkg --install webmin_1.670_all.deb;
-apt-get -y -f install;
-rm /root/webmin_1.670_all.deb
 service webmin restart
 service vnstat restart
 
@@ -182,6 +174,9 @@ echo "Script"  | tee -a log-install.txt
 echo "------"  | tee -a log-install.txt
 echo "screenfetch"  | tee -a log-install.txt
 echo "./ps_mem.py"  | tee -a log-install.txt
+echo "./login"  | tee -a log-install.txt
+echo "./member"  | tee -a log-install.txt
+echo "./userlmtop 2"  | tee -a log-install.txt
 echo "./speedtest_cli.py --share"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 
